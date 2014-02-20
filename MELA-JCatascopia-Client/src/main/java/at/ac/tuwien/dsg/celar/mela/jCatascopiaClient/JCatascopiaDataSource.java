@@ -96,7 +96,7 @@ public class JCatascopiaDataSource extends AbstractPoolingDataSource {
 //        updateJCatascopiaAgents(poolOfAgents);
 
         //added to improve query time
-        if (poolOfAgents.isEmpty()) {
+//        if (poolOfAgents.isEmpty()) {
             updateJCatascopiaAgents(poolOfAgents);
             System.err.println("Updating agents");
 
@@ -150,58 +150,58 @@ public class JCatascopiaDataSource extends AbstractPoolingDataSource {
                 }
 
             }
-        } else {
-            //added to improve time
-
-            for (JCatascopiaAgent agent : poolOfAgents) {
-                //if agent is active
-                if (agent.getStatus().equalsIgnoreCase("UP")) {
-//                    HostInfo hostInfo = null;
-//                    if (hostsMap.containsKey(agent.getIp())) {
-//                        hostInfo = hostsMap.get(agent.getIp());
-//                    } else {
-//                        hostInfo = new HostInfo();
-//                        hostInfo.setIp(agent.getIp());
-//                        hostInfo.setName(agent.getIp());
-//                        hostsMap.put(hostInfo.getIp(), hostInfo);
+//        } else {
+//            //added to improve time
+//
+//            for (JCatascopiaAgent agent : poolOfAgents) {
+//                //if agent is active
+//                if (agent.getStatus().equalsIgnoreCase("UP")) {
+////                    HostInfo hostInfo = null;
+////                    if (hostsMap.containsKey(agent.getIp())) {
+////                        hostInfo = hostsMap.get(agent.getIp());
+////                    } else {
+////                        hostInfo = new HostInfo();
+////                        hostInfo.setIp(agent.getIp());
+////                        hostInfo.setName(agent.getIp());
+////                        hostsMap.put(hostInfo.getIp(), hostInfo);
+////                    }
+//
+//                    getLatestMetricsValuesForJCatascopiaAgent(agent);
+//
+//                    //create monitoring data representation to be returned
+//
+//                    MonitoredElementData elementData = new MonitoredElementData();
+//
+//                    //create representation of monitored element to associate this data in the overall monitored service
+//                    MonitoredElement monitoredElement = new MonitoredElement();
+//
+//                    //for VM level, we use IP as monitored element ID
+//                    monitoredElement.setId(agent.getIp());
+//                    monitoredElement.setName(agent.getId());
+//
+//                    //for the moment we assume all what JCatascopia returns is associated to VM level
+//                    //TODO: consider inserting better level management mechanism in which one data source can return data for multiple levels
+//                    monitoredElement.setLevel(MonitoredElement.MonitoredElementLevel.VM);
+//
+//                    elementData.setMonitoredElement(monitoredElement);
+//
+//                    for (JCatascopiaMetric metric : agent.getAgentMetrics()) {
+//                        MetricInfo metricInfo = new MetricInfo();
+//                        metricInfo.setName(metric.getName());
+//                        metricInfo.setType(metric.getType());
+//                        metricInfo.setUnits(metric.getUnit());
+//                        metricInfo.setValue(metric.getValue());
+//                        elementData.addMetric(metricInfo);
 //                    }
-
-                    getLatestMetricsValuesForJCatascopiaAgent(agent);
-
-                    //create monitoring data representation to be returned
-
-                    MonitoredElementData elementData = new MonitoredElementData();
-
-                    //create representation of monitored element to associate this data in the overall monitored service
-                    MonitoredElement monitoredElement = new MonitoredElement();
-
-                    //for VM level, we use IP as monitored element ID
-                    monitoredElement.setId(agent.getIp());
-                    monitoredElement.setName(agent.getId());
-
-                    //for the moment we assume all what JCatascopia returns is associated to VM level
-                    //TODO: consider inserting better level management mechanism in which one data source can return data for multiple levels
-                    monitoredElement.setLevel(MonitoredElement.MonitoredElementLevel.VM);
-
-                    elementData.setMonitoredElement(monitoredElement);
-
-                    for (JCatascopiaMetric metric : agent.getAgentMetrics()) {
-                        MetricInfo metricInfo = new MetricInfo();
-                        metricInfo.setName(metric.getName());
-                        metricInfo.setType(metric.getType());
-                        metricInfo.setUnits(metric.getUnit());
-                        metricInfo.setValue(metric.getValue());
-                        elementData.addMetric(metricInfo);
-                    }
-
-                    monitoringData.addMonitoredElementData(elementData);
-
-                } else {
-                    Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "Agent {0} with IP {1} is down", new Object[]{agent.getId(), agent.getIp()});
-                }
-            }
-
-        }
+//
+//                    monitoringData.addMonitoredElementData(elementData);
+//
+//                } else {
+//                    Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "Agent {0} with IP {1} is down", new Object[]{agent.getId(), agent.getIp()});
+//                }
+//            }
+//
+//        }
 
 
         return monitoringData;
