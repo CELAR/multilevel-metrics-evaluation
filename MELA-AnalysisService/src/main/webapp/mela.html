@@ -310,7 +310,7 @@
                 //                // Normalize for fixed-depth.
                 nodes.forEach(function (d) {
                     if (d.type =="requirement"){
-                        d.y = 0.7 * (d.depth * depth);
+                        d.y = 0.85 * (d.depth * depth);
                     }else if(!d.type.match(/SERVIC.*|V.*/g) || (d.type =="requirement")){
                         if(d.parent.children){
                             var hasComplexChildren;
@@ -633,7 +633,7 @@
                 // Normalize for fixed-depth.
                 nodes.forEach(function (d) {
                     if (d.type =="requirement"){
-                         d.y = 0.7* (d.depth * depth);
+                         d.y = 0.85 * (d.depth * depth);
                     }else  if(!d.type.match(/SERVIC.*|V.*/g)){
                         if(d.parent.children){
                             var hasComplexChildren;
