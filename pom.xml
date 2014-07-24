@@ -37,8 +37,10 @@
    <modules>
         <module>MELA-DataService</module>
         <module>MELA-DataService-tar</module>
+        <module>MELA-DataService-rpm</module>
         <module>MELA-AnalysisService</module>
         <module>MELA-AnalysisService-tar</module>
+        <module>MELA-AnalysisService-rpm</module>
         <module>MELA-Common</module>
         <module>MELA-JCatascopia-Client</module>
   </modules>
