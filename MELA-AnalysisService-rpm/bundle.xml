@@ -14,24 +14,14 @@
                 </fileSet>
 
                  <fileSet>
-                        <directory>${project.basedir}/scripts</directory>
+                        <directory>${project.basedir}</directory>
                         <outputDirectory>/</outputDirectory>
                         <includes>
                                 <include>mela-analysis-service</include>
-                                <include>installer.sh</include>
                         </includes>
                         <fileMode>0755</fileMode>
                         <lineEnding>unix</lineEnding>
                 </fileSet>
-                <fileSet>
-                        <directory>${project.basedir}/scripts</directory>
-                        <outputDirectory>/</outputDirectory>
-                        <includes>
-                                <include>Help</include>
-                        </includes>
-                        <lineEnding>unix</lineEnding>
-                </fileSet>
-
                 <fileSet>
                         <directory>${project.build.directory}</directory>
                         <outputDirectory>/</outputDirectory>

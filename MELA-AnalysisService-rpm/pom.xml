@@ -112,7 +112,7 @@
               <directoryIncluded>false</directoryIncluded>
               <sources>
                 <source>
-                  <location>${project.build.directory}/multilevel-metrics-evaluation-rpm-1.0-SNAPSHOT/multilevel-metrics-evaluation-rpm-1.0-SNAPSHOT</location>
+                  <location>${project.build.directory}/MELA-AnalysisService-rpm-1.0-SNAPSHOT/MELA-AnalysisService-rpm-1.0-SNAPSHOT/</location>
                 </source>
               </sources>
             </mapping>
@@ -130,19 +130,6 @@
               </sources>
             </mapping>
 
-
-<mapping>
-              <directory>/etc/init.d</directory> 
-              <filemode>774</filemode>
-              <username>root</username>
-              <groupname>root</groupname>
-              <directoryIncluded>false</directoryIncluded>
-              <sources>
-                <source>
-                  <location>${project.build.directory}/MELA-AnalysisService-rpm-1.0-SNAPSHOT/MELA-AnalysisService-rpm-1.0-SNAPSHOT/mela-data-service</location>
-                </source>
-              </sources>
-            </mapping>
           </mappings>
 
           <preinstallScriptlet>
@@ -163,9 +150,6 @@
             <script>
 							 chkconfig mela-analysis-service on
 							 service mela-analysis-service start
-
-chkconfig mela-data-service on
-							 service mela-data-service start
             </script>
           </postinstallScriptlet>
         </configuration>
