@@ -53,13 +53,13 @@
                   <artifactId>MELA-AnalysisService</artifactId>
                   <type>jar</type>
                   <classifier>exec-war</classifier>
-                </artifactItem>								
+                </artifactItem>
               </artifactItems>
             </configuration>
           </execution>
         </executions>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -87,7 +87,7 @@
         <extensions>true</extensions>
         <configuration>
           <classifier>${package.os}</classifier>
-<!--          <release>${BUILD_NUMBER}.${package.os}</release>	-->
+         <release>${BUILD_NUMBER}.${package.os}</release>
           <summary>mela-analysis-service</summary>
           <name>mela-analysis-service</name>
           <group>Applications/Engineering</group>
@@ -104,7 +104,7 @@
 -->
           <mappings>
             <mapping>
-              <directory>/opt/mela-analysis-service</directory> 
+              <directory>/opt/mela-analysis-service</directory>
 <!--              <directory>${rpm.install.basedir}</directory> -->
               <filemode>664</filemode>
               <username>root</username>
@@ -116,9 +116,9 @@
                 </source>
               </sources>
             </mapping>
-						
+
 						<mapping>
-              <directory>/etc/init.d</directory> 
+              <directory>/etc/init.d</directory>
               <filemode>774</filemode>
               <username>root</username>
               <groupname>root</groupname>
@@ -138,11 +138,11 @@
 							yum -y install gcc
 							cd /usr/local/src/
 							wget -N http://za.archive.ubuntu.com/ubuntu/pool/main/d/dpkg/dpkg_1.15.5.6ubuntu4.tar.bz2
-							tar jfxvh dpkg_1.15.5.6ubuntu4.tar.bz2 
+							tar jfxvh dpkg_1.15.5.6ubuntu4.tar.bz2
 							rm dpkg_1.15.5.6ubuntu4.tar.bz2
 							cd dpkg-1.15.5.6ubuntu4/
 							make
-							make install						
+							make install
             </script>
           </preinstallScriptlet>
 
