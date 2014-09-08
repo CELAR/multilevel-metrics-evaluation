@@ -19,6 +19,9 @@
         <module>MELA-SpaceAndPathwayAnalysisService</module>
         <module>MELA-SpaceAndPathwayAnalysisService-tar</module>
         <module>MELA-SpaceAndPathwayAnalysisService-rpm</module>
+        <module>MELA-ComplexCostEvaluationService</module>
+        <module>MELA-ComplexCostEvaluationService-tar</module>
+        <module>MELA-ComplexCostEvaluationService-rpm</module>
         <module>MELA-JCatascopia-Client</module>
     </modules>
 

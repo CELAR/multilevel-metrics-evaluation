@@ -1,89 +1,90 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>eu.celar.multilevel-metrics-evaluation</groupId>
-		<artifactId>MELA-Core-Pom</artifactId>
-		<version>2.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
+        <artifactId>MELA-Core-Pom</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>MELA-DataService</artifactId>
-	<packaging>war</packaging>
+    <artifactId>MELA-DataService</artifactId>
+    <packaging>war</packaging>
 
-	<name>MELA-DataService</name>
-	<url>http://maven.apache.org</url>
+    <name>MELA-DataService</name>
+    <url>http://maven.apache.org</url>
 
-	<dependencies>
+    <dependencies>
 
-		<dependency>
-			<groupId>eu.celar.multilevel-metrics-evaluation</groupId>
-			<artifactId>MELA-Common</artifactId>
-			<version>2.0-SNAPSHOT</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>eu.celar.multilevel-metrics-evaluation</groupId>
-			<artifactId>MELA-JCatascopia-Client</artifactId>
-			<version>2.0-SNAPSHOT</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
+            <artifactId>MELA-Common</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
+            <artifactId>MELA-JCatascopia-Client</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
 
-		<!-- Dependency only on the MELA-DataService source files from the TUW 
-			MELA standalone repository, providing maximum building flexibility -->
-		<dependency>
-			<groupId>at.ac.tuwien.mela</groupId>
-			<artifactId>MELA-DataService</artifactId>
-			<version>3.0-SNAPSHOT</version>
-			<classifier>sources</classifier>
-		</dependency>
+        <!-- Dependency only on the MELA-DataService source files from the TUW 
+        MELA standalone repository, providing maximum building flexibility -->
+        <dependency>
+            <groupId>at.ac.tuwien.mela</groupId>
+            <artifactId>MELA-DataService</artifactId>
+            <version>3.0-SNAPSHOT</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
 		
-		<!-- Dependency on the MELA Common standalone source files to ease development -->
-		<dependency>
-			<groupId>at.ac.tuwien.mela</groupId>
-			<artifactId>MELA-Common</artifactId>
-			<version>3.0-SNAPSHOT</version>
-			<type>jar</type>
-			<classifier>sources</classifier>
-		</dependency>
+        <!-- Dependency on the MELA Common standalone source files to ease development -->
+        <dependency>
+            <groupId>at.ac.tuwien.mela</groupId>
+            <artifactId>MELA-Common</artifactId>
+            <version>3.0-SNAPSHOT</version>
+            <type>jar</type>
+            <classifier>sources</classifier>
+        </dependency>
 
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
-			<version>5.5.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.5.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.3.0</version>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.50</version>
-		</dependency>
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.50</version>
+        </dependency>
  
 
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
+    <build>
+        <plugins>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.2.1</version>
@@ -147,6 +148,6 @@
                 </executions>
             </plugin>
         </plugins>
-	</build>
+    </build>
 
 </project>

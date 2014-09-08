@@ -1,20 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
   
-  <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
-  <artifactId>MELA-Pom</artifactId>
-  <version>2.0-SNAPSHOT</version>
-  <name>MELA</name>
+    <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
+    <artifactId>MELA-Pom</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <name>MELA</name>
 
 
-  <parent>
-    <groupId>eu.celar</groupId>
-    <artifactId>distribution</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>eu.celar</groupId>
+        <artifactId>distribution</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-<properties>
+    <properties>
         <spring.version>4.0.0.RELEASE</spring.version>
         <slf4j.version>1.5.11</slf4j.version>
     </properties>
@@ -50,39 +50,39 @@
 
     </dependencies>
 
- <!-- Standalone MELA and core sources located for conveninence at https://github.com/tuwiendsg/MELA  -->
+    <!-- Standalone MELA and core sources located for conveninence at https://github.com/tuwiendsg/MELA  -->
 
-  <url>https://github.com/CELAR/multilevel-metrics-evaluation</url>
+    <url>https://github.com/CELAR/multilevel-metrics-evaluation</url>
 
 
-	<!-- Repository where MELA standalone files are located. This division makes 
-		MELA usable both inside and outside Celar with minimum effort. -->
-	<repositories>
-		<repository>
-			<id>infosys-repo</id>
-			<url>http://www.infosys.tuwien.ac.at/mvn</url>
-		</repository>
-	</repositories>
+    <!-- Repository where MELA standalone files are located. This division makes 
+    MELA usable both inside and outside Celar with minimum effort. -->
+    <repositories>
+        <repository>
+            <id>infosys-repo</id>
+            <url>http://www.infosys.tuwien.ac.at/mvn</url>
+        </repository>
+    </repositories>
 
-  <description>
-    MELA: implementation of Multi-Level Metrics Evaluation Module
-  </description>
+    <description>
+        MELA: implementation of Multi-Level Metrics Evaluation Module
+    </description>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
    
-   <modules>
+    <modules>
         <module>MELA-Core</module>
         <module>MELA-Extensions</module>
-  </modules>
+    </modules>
 
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>https://github.com/CELAR/multilevel-metrics-evaluation/issues</url>
-  </issueManagement>
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/CELAR/multilevel-metrics-evaluation/issues</url>
+    </issueManagement>
 
-  <scm>
-    <connection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</developerConnection>
-  </scm>
+    <scm>
+        <connection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</developerConnection>
+    </scm>
 
 </project>
