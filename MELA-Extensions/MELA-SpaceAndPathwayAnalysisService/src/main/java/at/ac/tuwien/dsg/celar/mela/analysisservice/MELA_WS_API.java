@@ -22,7 +22,7 @@ package at.ac.tuwien.dsg.celar.mela.analysisservice;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
-import at.ac.tuwien.dsg.mela.analysisservice.apis.webAPI.ElasticityAnalysisService;
+import at.ac.tuwien.dsg.mela.analysisservice.api.ElasticityAnalysisService;
 
 @Provider
 @Path("/")
