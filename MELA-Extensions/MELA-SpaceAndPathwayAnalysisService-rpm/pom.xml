@@ -168,13 +168,7 @@
                             <goal>attached-rpm</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>attach-rpm-on-install</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>attached-rpm</goal>
-                        </goals>
-                    </execution>
+                    
                 </executions>
             </plugin>
         </plugins>
