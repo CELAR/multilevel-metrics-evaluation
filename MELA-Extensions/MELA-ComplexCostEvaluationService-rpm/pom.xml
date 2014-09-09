@@ -33,6 +33,8 @@
     <properties>
         <rpm.install.basedir>/usr/share/mela</rpm.install.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <package.os>CentOS</package.os>
+        <BUILD_NUMBER>1</BUILD_NUMBER>
     </properties>
 
     <build>
@@ -91,6 +93,7 @@
                 <configuration>
                     <classifier>${package.os}</classifier>
                     <release>${BUILD_NUMBER}.${package.os}</release>
+                    <version>2.0</version>
                     <summary>mela-analysis-service</summary>
                     <name>mela-analysis-service</name>
                     <group>Applications/Engineering</group>
@@ -156,14 +159,23 @@
                         </script>
                     </postinstallScriptlet>
                 </configuration>
+                
                 <executions>
                     <execution>
-                        <id>attach-rpm</id>
+                        <id>attach-rpm-on-package</id>
                         <phase>package</phase>
                         <goals>
                             <goal>attached-rpm</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>attach-rpm-on-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>attached-rpm</goal>
+                        </goals>
+                    </execution>
+                     
                 </executions>
             </plugin>
         </plugins>

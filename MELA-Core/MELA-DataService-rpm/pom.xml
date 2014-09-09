@@ -42,7 +42,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-
+                
                 <executions>
                     <execution>
                         <id>copy-jar</id>
@@ -95,6 +95,7 @@
                     <classifier>${package.os}</classifier>
                     <release>${BUILD_NUMBER}.${package.os}</release>
                     <summary>mela-data-service</summary>
+                    <version>2.0</version>
                     <name>mela-data-service</name>
                     <group>Applications/Engineering</group>
                     <vendor>TUWien</vendor>
