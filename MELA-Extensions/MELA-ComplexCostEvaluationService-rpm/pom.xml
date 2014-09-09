@@ -36,6 +36,106 @@
         <package.os>CentOS</package.os>
         <BUILD_NUMBER>1</BUILD_NUMBER>
     </properties>
+    
+    <profiles>
+        <profile>
+            <id>Release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <classifier>${package.os}</classifier>
+                            <release>${BUILD_NUMBER}.${package.os}</release>
+                            <version>2.0</version>
+                            <summary>mela-analysis-service</summary>
+                            <name>mela-analysis-service</name>
+                            <group>Applications/Engineering</group>
+                            <vendor>TUWien</vendor>
+                            <packager>TUWien</packager>
+                            <copyright>Apache License, Version 2.0</copyright>
+                            <url>http://infosys.tuwien.ac.at</url>
+                            <needarch>noarch</needarch>
+                            <description>Multilevel Metrics Evaluation module</description>
+                            <!--
+                                      <requires>
+                                        <require>java&gt;= 1.7</require>
+                                      </requires>
+                            -->
+                            <mappings>
+                                <mapping>
+                                    <directory>/opt/mela-cost-eval-service</directory>
+                                    <!--              <directory>${rpm.install.basedir}</directory> -->
+                                    <filemode>664</filemode>
+                                    <username>root</username>
+                                    <groupname>root</groupname>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <sources>
+                                        <source>
+                                            <location>${project.build.directory}/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/</location>
+                                        </source>
+                                    </sources>
+                                </mapping>
+
+                                <mapping>
+                                    <directory>/etc/init.d</directory>
+                                    <filemode>774</filemode>
+                                    <username>root</username>
+                                    <groupname>root</groupname>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <sources>
+                                        <source>
+                                            <location>${project.build.directory}/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/mela-cost-eval-service</location>
+                                        </source>
+                                    </sources>
+                                </mapping>
+
+                            </mappings>
+
+                            <preinstallScriptlet>
+                                <script>
+                                    <!-- install debian init script: start-stop-deamon -->
+                                    yum -y install gcc
+                                    cd /usr/local/src/
+                                    wget -N http://za.archive.ubuntu.com/ubuntu/pool/main/d/dpkg/dpkg_1.15.5.6ubuntu4.tar.bz2
+                                    tar jfxvh dpkg_1.15.5.6ubuntu4.tar.bz2
+                                    rm dpkg_1.15.5.6ubuntu4.tar.bz2
+                                    cd dpkg-1.15.5.6ubuntu4/
+                                    make
+                                    make install
+                                </script>
+                            </preinstallScriptlet>
+
+                            <postinstallScriptlet>
+                                <script>
+                                    chkconfig mela-analysis-service on
+                                    service mela-analysis-service start
+                                </script>
+                            </postinstallScriptlet>
+                        </configuration>
+                
+                        <executions>
+                            <execution>
+                                <id>attach-rpm-on-package</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attached-rpm</goal>
+                                </goals>
+                            </execution>
+                
+                     
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
+
+
 
     <build>
         <plugins>
@@ -86,92 +186,7 @@
             </plugin>
 
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>rpm-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <classifier>${package.os}</classifier>
-                    <release>${BUILD_NUMBER}.${package.os}</release>
-                    <version>2.0</version>
-                    <summary>mela-analysis-service</summary>
-                    <name>mela-analysis-service</name>
-                    <group>Applications/Engineering</group>
-                    <vendor>TUWien</vendor>
-                    <packager>TUWien</packager>
-                    <copyright>Apache License, Version 2.0</copyright>
-                    <url>http://infosys.tuwien.ac.at</url>
-                    <needarch>noarch</needarch>
-                    <description>Multilevel Metrics Evaluation module</description>
-                    <!--
-                              <requires>
-                                <require>java&gt;= 1.7</require>
-                              </requires>
-                    -->
-                    <mappings>
-                        <mapping>
-                            <directory>/opt/mela-cost-eval-service</directory>
-                            <!--              <directory>${rpm.install.basedir}</directory> -->
-                            <filemode>664</filemode>
-                            <username>root</username>
-                            <groupname>root</groupname>
-                            <directoryIncluded>false</directoryIncluded>
-                            <sources>
-                                <source>
-                                    <location>${project.build.directory}/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/</location>
-                                </source>
-                            </sources>
-                        </mapping>
-
-                        <mapping>
-                            <directory>/etc/init.d</directory>
-                            <filemode>774</filemode>
-                            <username>root</username>
-                            <groupname>root</groupname>
-                            <directoryIncluded>false</directoryIncluded>
-                            <sources>
-                                <source>
-                                    <location>${project.build.directory}/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/MELA-ComplexCostEvaluationService-rpm-2.0-SNAPSHOT/mela-cost-eval-service</location>
-                                </source>
-                            </sources>
-                        </mapping>
-
-                    </mappings>
-
-                    <preinstallScriptlet>
-                        <script>
-                            <!-- install debian init script: start-stop-deamon -->
-                            yum -y install gcc
-                            cd /usr/local/src/
-                            wget -N http://za.archive.ubuntu.com/ubuntu/pool/main/d/dpkg/dpkg_1.15.5.6ubuntu4.tar.bz2
-                            tar jfxvh dpkg_1.15.5.6ubuntu4.tar.bz2
-                            rm dpkg_1.15.5.6ubuntu4.tar.bz2
-                            cd dpkg-1.15.5.6ubuntu4/
-                            make
-                            make install
-                        </script>
-                    </preinstallScriptlet>
-
-                    <postinstallScriptlet>
-                        <script>
-                            chkconfig mela-analysis-service on
-                            service mela-analysis-service start
-                        </script>
-                    </postinstallScriptlet>
-                </configuration>
-                
-                <executions>
-                    <execution>
-                        <id>attach-rpm-on-package</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attached-rpm</goal>
-                        </goals>
-                    </execution>
-                
-                     
-                </executions>
-            </plugin>
+        
         </plugins>
     </build>
 
