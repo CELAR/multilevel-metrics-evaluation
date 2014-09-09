@@ -101,11 +101,9 @@
                     <url>http://infosys.tuwien.ac.at</url>
                     <needarch>noarch</needarch>
                     <description>Multilevel Metrics Evaluation module</description>
-                    <!--
-                              <requires>
-                                <require>java&gt;= 1.7</require>
-                              </requires>
-                    -->
+                    <requires>
+                        <require>java&gt;= 1.7</require>
+                    </requires>
                     <mappings>
                         <mapping>
                             <directory>/opt/mela-data-service</directory>
@@ -135,7 +133,7 @@
                         </mapping>
                     </mappings>
 
- <!--                      <preinstallScriptlet>
+                    <!--                      <preinstallScriptlet>
                      <script>
                              install debian init script: start-stop-deamon 
                             yum -y install gcc
