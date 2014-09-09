@@ -86,11 +86,10 @@
             </plugin>
 
 
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>rpm-cbuild-maven-plugin</artifactId>
-                <version>1.0-beta-1</version>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.0.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <classifier>${package.os}</classifier>
@@ -160,23 +159,16 @@
                 <executions>
                     <execution>
                         <id>attach-rpm-on-package</id>
-                        <phase>compile</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>generate-spec</goal>
+                            <goal>attached-rpm</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>attach-rpm-on-install</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>attach-rpm-on-install</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
+                            <goal>attached-rpm</goal>
                         </goals>
                     </execution>
                 </executions>
