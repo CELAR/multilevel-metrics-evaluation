@@ -66,12 +66,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
         poolOfAgents = new ArrayList<JCatascopiaAgent>();
     }
 
-    public JCatascopiaDataSource(Map<String, String> configuration) {
-        if (configuration.containsKey("JCatascopia.url")) {
-            url = configuration.get("JCatascopia.url");
-        }
-    }
-
     /**
      * Currently the implementation is stupid. It queries for JCatscopia to get
      * All Agents, then it queries for each Agent getAvailableMetrics, and then
@@ -91,17 +85,15 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 
         //map for holding the IP, and JCatascopiaAgent, as maybe multiple JCatascopia agents can belong to the same VM, make sure we merge all data
 //        Map<String, JCatascopiaAgent> hostsMap = new HashMap<String, JCatascopiaAgent>();
-
 //        updateJCatascopiaAgents(poolOfAgents);
-
         //added to improve query time
 //        if (poolOfAgents.isEmpty()) {
-            updateJCatascopiaAgents(poolOfAgents);
-            System.err.println("Updating agents");
+        updateJCatascopiaAgents(poolOfAgents);
+        System.err.println("Updating agents");
 
-            for (JCatascopiaAgent agent : poolOfAgents) {
-                //if agent is active
-                if (agent.getStatus().equalsIgnoreCase("UP")) {
+        for (JCatascopiaAgent agent : poolOfAgents) {
+            //if agent is active
+            if (agent.getStatus().equalsIgnoreCase("UP")) {
 //                    HostInfo hostInfo = null;
 //                    if (hostsMap.containsKey(agent.getIp())) {
 //                        hostInfo = hostsMap.get(agent.getIp());
@@ -112,43 +104,42 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 //                        hostsMap.put(hostInfo.getIp(), hostInfo);
 //                    }
 
-                    //update metrics using REST API from JCatascopia
-                    updateMetricsForJCatascopiaAgent(agent);
-                    getLatestMetricsValuesForJCatascopiaAgent(agent);
+                //update metrics using REST API from JCatascopia
+                updateMetricsForJCatascopiaAgent(agent);
+                getLatestMetricsValuesForJCatascopiaAgent(agent);
 
-                    //create monitoring data representation to be returned
+                //create monitoring data representation to be returned
+                MonitoredElementData elementData = new MonitoredElementData();
 
-                    MonitoredElementData elementData = new MonitoredElementData();
+                //create representation of monitored element to associate this data in the overall monitored service
+                MonitoredElement monitoredElement = new MonitoredElement();
 
-                    //create representation of monitored element to associate this data in the overall monitored service
-                    MonitoredElement monitoredElement = new MonitoredElement();
+                //for VM level, we use IP as monitored element ID
+                monitoredElement.setId(agent.getIp());
+                monitoredElement.setName(agent.getId());
 
-                    //for VM level, we use IP as monitored element ID
-                    monitoredElement.setId(agent.getIp());
-                    monitoredElement.setName(agent.getId());
+                //for the moment we assume all what JCatascopia returns is associated to VM level
+                //TODO: consider inserting better level management mechanism in which one data source can return data for multiple levels
+                monitoredElement.setLevel(MonitoredElement.MonitoredElementLevel.VM);
 
-                    //for the moment we assume all what JCatascopia returns is associated to VM level
-                    //TODO: consider inserting better level management mechanism in which one data source can return data for multiple levels
-                    monitoredElement.setLevel(MonitoredElement.MonitoredElementLevel.VM);
+                elementData.setMonitoredElement(monitoredElement);
 
-                    elementData.setMonitoredElement(monitoredElement);
-
-                    for (JCatascopiaMetric metric : agent.getAgentMetrics()) {
-                        MetricInfo metricInfo = new MetricInfo();
-                        metricInfo.setName(metric.getName());
-                        metricInfo.setType(metric.getType());
-                        metricInfo.setUnits(metric.getUnit());
-                        metricInfo.setValue(metric.getValue());
-                        elementData.addMetric(metricInfo);
-                    }
-
-                    monitoringData.addMonitoredElementData(elementData);
-
-                } else {
-                    Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "Agent {0} with IP {1} is down", new Object[]{agent.getId(), agent.getIp()});
+                for (JCatascopiaMetric metric : agent.getAgentMetrics()) {
+                    MetricInfo metricInfo = new MetricInfo();
+                    metricInfo.setName(metric.getName());
+                    metricInfo.setType(metric.getType());
+                    metricInfo.setUnits(metric.getUnit());
+                    metricInfo.setValue(metric.getValue());
+                    elementData.addMetric(metricInfo);
                 }
 
+                monitoringData.addMonitoredElementData(elementData);
+
+            } else {
+                Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "Agent {0} with IP {1} is down", new Object[]{agent.getId(), agent.getIp()});
             }
+
+        }
 //        } else {
 //            //added to improve time
 //
@@ -201,7 +192,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 //            }
 //
 //        }
-
 
         return monitoringData;
     }
@@ -295,7 +285,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 
                 }
 
-
             } else {
                 Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "No JCatascopia agents found in {0}", agentsDescription);
             }
@@ -352,7 +341,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
                 availableMetrics += line;
             }
 
-
             JSONObject object = new JSONObject(availableMetrics);
             if (object.has("metrics")) {
                 JSONArray metrics = object.getJSONArray("metrics");
@@ -374,7 +362,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
                         agentMetrics.remove(0);
                     }
                 }
-
 
                 //populate the metrics pool
                 for (int i = 0; i < metrics.length(); i++) {
@@ -418,11 +405,9 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 
                 }
 
-
             } else {
                 Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "No JCatascopia metrics found in {0}", availableMetrics);
             }
-
 
         } catch (Exception e) {
             Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -507,7 +492,6 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
                     metricsMap.put(jCatascopiaMetric.getId(), jCatascopiaMetric);
                 }
 
-
                 //populate the metrics pool
                 for (int i = 0; i < metrics.length(); i++) {
                     JSONObject metric = metrics.getJSONObject(i);
@@ -541,11 +525,9 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 
                 }
 
-
             } else {
                 Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, "No JCatascopia metrics found in {0}", availableMetrics);
             }
-
 
         } catch (Exception e) {
             Logger.getLogger(JCatascopiaDataSource.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -568,7 +550,5 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
         this.url = url;
         return this;
     }
- 
- 
-    
+
 }
