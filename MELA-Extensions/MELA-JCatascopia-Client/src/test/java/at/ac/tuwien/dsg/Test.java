@@ -33,10 +33,9 @@ public class Test {
 
     public static void main(String[] args) throws DataAccessException {
 
-        Map<String, String> configuration = new HashMap<String, String>();
 
-        configuration.put("JCatascopia.url", "http://109.231.122.22:8080/JCatascopia-Web/restAPI");
-        JCatascopiaDataSource catascopiaDataSource = new JCatascopiaDataSource(configuration);
+        JCatascopiaDataSource catascopiaDataSource = new JCatascopiaDataSource();
+        catascopiaDataSource.setUrl("http://109.231.122.22:8080/JCatascopia-Web/restAPI");
         MonitoringData data = catascopiaDataSource.getMonitoringData();
         for (MonitoredElementData me : data.getMonitoredElementDatas()) {
             System.out.println(me.toString());

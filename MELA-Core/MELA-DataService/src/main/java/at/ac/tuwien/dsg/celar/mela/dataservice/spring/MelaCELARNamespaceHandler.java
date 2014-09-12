@@ -1,7 +1,6 @@
 package at.ac.tuwien.dsg.celar.mela.dataservice.spring;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-import at.ac.tuwien.dsg.mela.dataservice.spring.GangliaDataSourceBeanDefinitionParser;
 
 /**
  * Created by omoser on 1/17/14.
@@ -9,7 +8,7 @@ import at.ac.tuwien.dsg.mela.dataservice.spring.GangliaDataSourceBeanDefinitionP
 public class MelaCELARNamespaceHandler extends NamespaceHandlerSupport {
 
     public void init() {
+        registerBeanDefinitionParser("jcatascopia-poll-datasource", new JCatascopiaDataSourceBeanDefinitionParser());
         registerBeanDefinitionParser("ganglia-datasource", new GangliaDataSourceBeanDefinitionParser());
-        registerBeanDefinitionParser("jcatascopia-poll-datasource ", new JCatascopiaDataSourceBeanDefinitionParser());
     }
 }

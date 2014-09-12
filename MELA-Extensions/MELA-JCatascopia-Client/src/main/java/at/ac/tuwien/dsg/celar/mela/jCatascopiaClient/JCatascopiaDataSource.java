@@ -66,6 +66,10 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
         poolOfAgents = new ArrayList<JCatascopiaAgent>();
     }
 
+    public JCatascopiaDataSource() {
+    }
+    
+
     /**
      * Currently the implementation is stupid. It queries for JCatscopia to get
      * All Agents, then it queries for each Agent getAvailableMetrics, and then

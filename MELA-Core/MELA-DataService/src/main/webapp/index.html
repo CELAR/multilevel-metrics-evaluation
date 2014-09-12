@@ -78,7 +78,7 @@
             }
 
             refreshServicesListRequest.onreadystatechange = processRefreshServicesResponse;
-            refreshServicesListRequest.open("GET", "./REST_WS/services", true);
+            refreshServicesListRequest.open("GET", "./REST_WS/elasticservices", true);
             refreshServicesListRequest.setRequestHeader('Content-type', 'application/xml');
             refreshServicesListRequest.send(null);
         }
