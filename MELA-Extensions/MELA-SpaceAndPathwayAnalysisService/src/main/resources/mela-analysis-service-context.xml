@@ -13,20 +13,20 @@
 
     <context:property-placeholder location="file:./config/mela-analysis-service.properties"/>
 
-    <context:component-scan base-package="at.ac.tuwien.dsg.mela"/>
+    <context:component-scan base-package="at.ac.tuwien.dsg"/>
     
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
 
-    <jaxrs:server id="customerService" address="/">
+    <jaxrs:server id="spaceAndPathwayAnalysisServiceAPIServer" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="elasticityAnalysisService"/>
-            <bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
+            <ref bean="spaceAndPathwayAnalysisServiceAPI"/>
+            <!--<bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>-->
         </jaxrs:serviceBeans>
         <jaxrs:features>
             <cxf:logging/>
         </jaxrs:features>
         <jaxrs:providers>
-            <bean class="at.ac.tuwien.dsg.mela.analysisservice.cxf.MelaElasticityAnalysisServiceExceptionMapper"/>
+            <bean class="at.ac.tuwien.dsg.celar.mela.analysisservice.spring.MelaSpaceAndPathwayAnalysisServiceExceptionMapper"/>
             <bean class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider"/>
             <bean class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider"/>
         </jaxrs:providers>

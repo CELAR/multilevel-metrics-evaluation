@@ -23,9 +23,13 @@ package at.ac.tuwien.dsg.celar.mela.analysisservice;
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
 import at.ac.tuwien.dsg.mela.analysisservice.api.ElasticityAnalysisService;
+import com.wordnik.swagger.annotations.Api;
+import org.springframework.stereotype.Service;
 
+@Service
 @Provider
 @Path("/")
-public class MELA_WS_API extends ElasticityAnalysisService{
+@Api(value = "/", description = "The ElasticityAnalysisService is the entry point for all elasticity related monitoring data")
+public class SpaceAndPathwayAnalysisServiceAPI extends ElasticityAnalysisService{
 
 }
