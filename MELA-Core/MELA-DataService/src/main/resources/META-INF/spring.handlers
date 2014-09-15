@@ -1,3 +1,1 @@
 http\://www.infosys.tuwien.ac.at/schema/mela=at.ac.tuwien.dsg.celar.mela.dataservice.spring.MelaCELARNamespaceHandler
-http\://www.infosys.tuwien.ac.at/schema/mela/spring-mela-jcatascopia.xsd=at.ac.tuwien.dsg.celar.mela.dataservice.spring.MelaCELARNamespaceHandler
-http\://www.infosys.tuwien.ac.at/schema/mela/spring-mela-ganglia.xsd=at.ac.tuwien.dsg.celar.mela.dataservice.spring.MelaCELARNamespaceHandler
