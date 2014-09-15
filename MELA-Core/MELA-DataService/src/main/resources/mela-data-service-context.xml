@@ -69,7 +69,7 @@
     </amq:broker>
  
     <jms:listener-container container-type="default" connection-factory="jmsFactory" acknowledge="auto">
-        <jms:listener destination="MELADataService.Config" ref="commandConsumer"/>
+        <jms:listener destination="MELADataService.Config" ref="messageQueueAPI"/>
     </jms:listener-container>
     
     <!-- Adds annotated spring beans -->
