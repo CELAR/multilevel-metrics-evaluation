@@ -1,4 +1,4 @@
-package at.ac.tuwien.dsg.celar.mela.analysisservice.spring;
+package at.ac.tuwien.dsg.celar.mela.costeval.spring;
 /**
  * Copyright 2013 Technische Universitat Wien (TUW), Distributed Systems Group
  * E184
@@ -23,11 +23,10 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ext.Provider;
 
-
  
 @Provider
 @Component
-public class MelaSpaceAndPathwayAnalysisServiceExceptionMapper extends at.ac.tuwien.dsg.mela.analysisservice.cxf.MelaElasticityAnalysisServiceExceptionMapper {
+public class MelaCELARCostEvalServiceExceptionMapper extends at.ac.tuwien.dsg.mela.costeval.cxf.MelaCostEvalServiceExceptionMapper {
     
 
 }
