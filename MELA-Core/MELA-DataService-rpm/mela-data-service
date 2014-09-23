@@ -14,7 +14,7 @@ JAVA=$(which java)
 NAME=mela-data-service
 DAEMONDIR=/opt/mela-data-service
 DAEMON=MELA-DataService-2.0-SNAPSHOT-exec-war.jar
-PIDDIR=/tmp/
+PIDDIR=/tmp
 PIDFILE=$PIDDIR/mela-data-service.pid
 MELA_HTTP_PORT=8180
 LOG_DIR=/tmp/mela
@@ -30,6 +30,7 @@ case "$1" in
 		echo "Starting Mela-DataService daemon"
 		mkdir -p $LOG_DIR
 		cd $DAEMONDIR
+		echo "Saving pid file in $PIDFILE"
                 daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela.log  2>&1 &
 		RETVAL=$?
                 echo
@@ -38,7 +39,9 @@ case "$1" in
 	stop)
 		echo "Stopping Mela-DataService daemon"
 		#killproc --pidfile $PIDFILE
-		killproc --p $PIDFILE daemon
+		pid=`ps -ef | grep $DAEMON | tr -s ' '  | cut -f2 -d ' ' | head -n 2
+		echo $pid
+		sudo kill -9 $pid
 		RETVAL=$?
    		echo
                 [ $RETVAL = 0 ] && rm -f /var/lock/mela-data-service-daemon
@@ -54,7 +57,7 @@ case "$1" in
 		if [ $status -eq 0 ]; then
 			echo "Mela-DataService is running"
 		else
-			echo"Mela-DataService is not running"
+			echo "Mela-DataService is not running"
 		fi
 		exit $status
 		;;

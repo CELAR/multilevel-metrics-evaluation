@@ -145,7 +145,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/MELA-SpaceAndPathwayAnalysisService-rpm-2.0-SNAPSHOT/MELA-SpaceAndPathwayAnalysisService-rpm-2.0-SNAPSHOT</outputDirectory>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>eu.celar.multilevel-metrics-evaluation</groupId>
