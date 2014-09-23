@@ -60,9 +60,11 @@
                             <url>http://infosys.tuwien.ac.at</url>
                             <needarch>noarch</needarch>
                             <description>Multilevel Metrics Evaluation module</description>
-                            <requires>
+                            <!--
+			    <requires>
                                 <require>java&gt;= 1.7</require>
                             </requires>
+			    -->
                             <mappings>
                                 <mapping>
                                     <directory>/opt/mela-data-service</directory>
