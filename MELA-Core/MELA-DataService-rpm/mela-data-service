@@ -30,14 +30,15 @@ case "$1" in
 		echo "Starting Mela-DataService daemon"
 		mkdir -p $LOG_DIR
 		cd $DAEMONDIR
-                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT < /dev/null > $LOG_DIR/mela.log &
+                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela.log  2>&1 &
 		RETVAL=$?
                 echo
 		[ $RETVAL = 0 ] && touch /var/lock/mela-data-service-daemon
 		;;
 	stop)
 		echo "Stopping Mela-DataService daemon"
-		killproc --pidfile $PIDFILE
+		#killproc --pidfile $PIDFILE
+		killproc --p $PIDFILE daemon
 		RETVAL=$?
    		echo
                 [ $RETVAL = 0 ] && rm -f /var/lock/mela-data-service-daemon
