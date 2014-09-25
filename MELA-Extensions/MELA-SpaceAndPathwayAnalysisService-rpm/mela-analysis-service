@@ -9,7 +9,7 @@
 ### END INIT INFO
 
 RUN_MODE="daemons"
-
+. /etc/profile
 JAVA=$(which java)
 NAME=mela-analysis-service
 DAEMONDIR=/opt/mela-analysis-service
@@ -23,18 +23,24 @@ test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
  
 
 . /lib/lsb/init-functions
+. /etc/init.d/functions
 
 case "$1" in
 	start)
 		echo "Starting Mela-SpaceAndPathwayAnalysisService daemon"
-                daemon --chdir=$DAEMONDIR --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT
+		mkdir -p $LOG_DIR
+                cd $DAEMONDIR
+                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela-analysis.log  2>&1 &
 		RETVAL=$?
                 echo
 		[ $RETVAL = 0 ] && touch /var/lock/mela-analysis-service-daemon
 		;;
 	stop)
 		echo "Stopping Mela-SpaceAndPathwayAnalysisService daemon"
-		killproc --pidfile $PIDFILE
+		#killproc --pidfile $PIDFILE
+		pid=`ps -ef | grep $DAEMON | tr -s ' '  | cut -f2 -d ' ' | head -n 2`
+                echo $pid
+                sudo kill -9 $pid
 		RETVAL=$?
    		echo
                 [ $RETVAL = 0 ] && rm -f /var/lock/mela-analysis-service-daemon
@@ -50,7 +56,7 @@ case "$1" in
 		if [ $status -eq 0 ]; then
 			echo "Mela-SpaceAndPathwayAnalysisService is running"
 		else
-			echo"Mela-SpaceAndPathwayAnalysisService is not running"
+			echo "Mela-SpaceAndPathwayAnalysisService is not running"
 		fi
 		exit $status
 		;;
