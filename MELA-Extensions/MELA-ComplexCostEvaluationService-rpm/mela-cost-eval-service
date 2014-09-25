@@ -16,7 +16,7 @@ DAEMONDIR=/opt/mela-cost-analysis-service
 DAEMON=MELA-ComplexCostEvaluationService-2.0-SNAPSHOT-exec-war
 PIDDIR=/tmp/
 PIDFILE=$PIDDIR/mela-cost-analysis-service.pid
-MELA_HTTP_PORT=8181
+MELA_HTTP_PORT=8182
 
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test $DAEMONDIR/$DAEMON dod not succed" 
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
