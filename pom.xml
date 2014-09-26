@@ -82,9 +82,6 @@
         <module>MELA-Core/MELA-DataService</module>
         <module>MELA-Core/MELA-DataService-tar</module>
         <module>MELA-Core/MELA-DataService-rpm</module>
-        <module>MELA-Extensions/MELA-SpaceAndPathwayAnalysisService</module>
-        <module>MELA-Extensions/MELA-SpaceAndPathwayAnalysisService-tar</module>
-        <module>MELA-Extensions/MELA-SpaceAndPathwayAnalysisService-rpm</module>
         <module>MELA-Extensions/MELA-ComplexCostEvaluationService</module>
         <module>MELA-Extensions/MELA-ComplexCostEvaluationService-tar</module>
         <module>MELA-Extensions/MELA-ComplexCostEvaluationService-rpm</module>
