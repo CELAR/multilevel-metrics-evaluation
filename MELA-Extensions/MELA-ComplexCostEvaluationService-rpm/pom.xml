@@ -70,8 +70,8 @@
                     <classifier>${package.os}</classifier>
                     <release>${BUILD_NUMBER}.${package.os}</release>
                     <version>2.0</version>
-                    <summary>mela-analysis-service</summary>
-                    <name>mela-analysis-service</name>
+                    <summary>mela-cost-eval-service</summary>
+                    <name>mela-cost-eval-service</name>
                     <group>Applications/Engineering</group>
                     <vendor>TUWien</vendor>
                     <packager>TUWien</packager>
