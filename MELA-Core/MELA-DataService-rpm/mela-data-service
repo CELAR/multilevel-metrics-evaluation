@@ -38,7 +38,7 @@ case "$1" in
 	stop)
 		echo "Stopping Mela-DataService daemon"
 		#killproc --pidfile $PIDFILE
-		pid=`ps -ef | grep $DAEMON | tr -s ' '  | cut -f2 -d ' ' | head -n 2
+		pid=`ps -ef | grep $DAEMON | tr -s ' '  | cut -f2 -d ' ' | head -n 2`
 		echo $pid
 		sudo kill -9 $pid
 		RETVAL=$?
