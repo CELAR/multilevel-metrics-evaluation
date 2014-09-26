@@ -21,8 +21,7 @@ MELA_HTTP_PORT=8182
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test $DAEMONDIR/$DAEMON dod not succed" 
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
  
-
-. /lib/lsb/init-functions
+. /etc/init.d/functions
 
 case "$1" in
 	start)
