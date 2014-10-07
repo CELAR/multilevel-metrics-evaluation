@@ -68,7 +68,7 @@
                     <classifier>${package.os}</classifier>
                     <release>${BUILD_NUMBER}.${package.os}</release>
                     <summary>mela-data-service</summary>
-                    <version>2.0</version>
+                    <version>1.0</version>
                     <name>mela-data-service</name>
                     <group>Applications/Engineering</group>
                     <vendor>TUWien</vendor>
