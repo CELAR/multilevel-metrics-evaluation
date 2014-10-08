@@ -30,6 +30,7 @@
         </dependency>
     </dependencies>
 
+
     <properties>
         <rpm.install.basedir>/usr/share/mela</rpm.install.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
