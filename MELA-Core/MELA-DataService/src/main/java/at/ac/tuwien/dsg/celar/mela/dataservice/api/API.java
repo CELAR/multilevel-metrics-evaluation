@@ -33,7 +33,7 @@ import at.ac.tuwien.dsg.mela.dataservice.api.ConfigurationService;
 @Service
 @Provider
 @Path("/")
-@Api(value = "/", description = "The ElasticityAnalysisService is the entry point for all elasticity related monitoring data")
+@Api(value = "/", description = "The Data service is the entry point for all monitoring concerns")
 public class API extends ConfigurationService{
 
 }
