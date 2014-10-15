@@ -1,6 +1,6 @@
 ### BEGIN INIT INFO
 # Provides:          mela-cost-analysis-service
-# Required-Start:
+# Required-Start: mysqld
 # Required-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
@@ -9,7 +9,7 @@
 ### END INIT INFO
 
 RUN_MODE="daemons"
-
+. /etc/profile
 JAVA=$(which java)
 NAME=mela-cost-analysis-service
 DAEMONDIR=/opt/mela-cost-analysis-service
@@ -17,7 +17,9 @@ DAEMON=MELA-ComplexCostEvaluationService-1.0-SNAPSHOT-exec-war
 PIDDIR=/tmp/
 PIDFILE=$PIDDIR/mela-cost-analysis-service.pid
 MELA_HTTP_PORT=8182
-
+PROFILES=MYSQL
+#PROFILES=H2
+#PROFILES=PORTABLE
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test $DAEMONDIR/$DAEMON dod not succed" 
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
  
@@ -25,19 +27,24 @@ test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
 
 case "$1" in
 	start)
-		echo "Starting Mela-ComplexCostEvaluationService daemon"
-                daemon --chdir=$DAEMONDIR --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT
+		echo "Starting Mela-CostEvaluationService  daemon"
+		mkdir -p $LOG_DIR
+                cd $DAEMONDIR
+                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela-cost-eval.log -Dspring.profiles.active=$PROFILES 2>&1 &
 		RETVAL=$?
                 echo
 		[ $RETVAL = 0 ] && touch /var/lock/mela-cost-analysis-service-daemon
-		return $RETVAL
+		;;
 	stop)
-		echo "Stopping Mela-ComplexCostEvaluationService daemon"
-		killproc --pidfile $PIDFILE
+		echo "Stopping Mela-CostEvaluationService  daemon"
+		#killproc --pidfile $PIDFILE
+		pid=`ps -ef | grep $DAEMON | tr -s ' '  | cut -f2 -d ' ' | head -n 2`
+                echo $pid
+                sudo kill -9 $pid
 		RETVAL=$?
    		echo
                 [ $RETVAL = 0 ] && rm -f /var/lock/mela-cost-analysis-service-daemon
- 
+ 		;;
 	restart)
 		$0 stop
 		sleep 1
@@ -47,9 +54,9 @@ case "$1" in
 		pidofproc -p $PIDFILE $JAVA >/dev/null
 		status=$?
 		if [ $status -eq 0 ]; then
-			echo "Mela-ComplexCostEvaluationService is running"
+			echo "Mela-CostEvaluationService  is running"
 		else
-			echo"Mela-ComplexCostEvaluationService is not running"
+			echo "Mela-CostEvaluationService is not running"
 		fi
 		exit $status
 		;;
