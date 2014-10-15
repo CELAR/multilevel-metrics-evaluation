@@ -126,8 +126,9 @@
                         <configuration>
                             <reResolve>false</reResolve>
                             <includes>
-                                <include>at.ac.tuwien.mela:*</include>
-                                <include>eu.celar.multilevel-metrics-evaluation:*</include>
+                                <include>eu.celar.multilevel-metrics-evaluation:MELA-Common</include>
+                                <include>eu.celar.multilevel-metrics-evaluation:MELA-DataService</include>
+                                <include>eu.celar.multilevel-metrics-evaluation:MELA-SpaceAndPathwayAnalysisService</include>
                             </includes>
                         </configuration>
                     </execution>
