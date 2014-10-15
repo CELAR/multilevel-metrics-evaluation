@@ -1,6 +1,6 @@
 ### BEGIN INIT INFO
-# Provides:          mela-analysis-service
-# Required-Start:
+# Provides:          mela-data-service
+# Required-Start: mysqld
 # Required-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
@@ -18,6 +18,10 @@ PIDDIR=/tmp
 PIDFILE=$PIDDIR/mela-data-service.pid
 MELA_HTTP_PORT=8180
 LOG_DIR=/tmp/mela
+PROFILES=MYSQL
+#PROFILES=H2
+#PROFILES=PORTABLE
+
 
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test -x $JAVA -a -f $DAEMONDIR/$DAEMON failed"  
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
@@ -30,7 +34,7 @@ case "$1" in
 		mkdir -p $LOG_DIR
 		cd $DAEMONDIR
 		echo "Saving pid file in $PIDFILE"
-                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela.log  2>&1 &
+                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT -Dspring.profiles.active=$PROFILES > $LOG_DIR/mela.log  2>&1 &
 		RETVAL=$?
                 echo
 		[ $RETVAL = 0 ] && touch /var/lock/mela-data-service-daemon
