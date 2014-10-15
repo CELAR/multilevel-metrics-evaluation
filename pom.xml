@@ -108,7 +108,7 @@
         <connection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</developerConnection>
     </scm>
-    <build>
+<!--    <build>
         <plugins>
                
             <plugin>
@@ -136,6 +136,6 @@
             </plugin>
   
         </plugins>
-    </build>   
+    </build>   -->
 
 </project>
