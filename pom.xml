@@ -59,7 +59,6 @@
 
     <url>https://github.com/CELAR/multilevel-metrics-evaluation</url>
 
-
     <!-- Repository where MELA standalone files are located. This division makes 
     MELA usable both inside and outside Celar with minimum effort. -->
     <repositories>
