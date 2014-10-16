@@ -108,34 +108,4 @@
         <connection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:CELAR/multilevel-metrics-evaluation.git</developerConnection>
     </scm>
-    <build>
-        <plugins>
-               
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.9</version>
-                <executions>
-                    <execution>
-                        <id>purge-local-dependencies</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>purge-local-repository</goal>
-                        </goals>
-                   
-                        <configuration>
-                            <reResolve>false</reResolve>
-                            <includes>
-                                <include>eu.celar.multilevel-metrics-evaluation:MELA-Common</include>
-                                <include>eu.celar.multilevel-metrics-evaluation:MELA-DataService</include>
-                                <include>eu.celar.multilevel-metrics-evaluation:MELA-SpaceAndPathwayAnalysisService</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-  
-        </plugins>
-    </build>   
-
 </project>
