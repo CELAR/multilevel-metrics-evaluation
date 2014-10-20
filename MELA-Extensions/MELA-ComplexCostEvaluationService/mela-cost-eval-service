@@ -30,7 +30,7 @@ case "$1" in
 		echo "Starting Mela-CostEvaluationService  daemon"
 		mkdir -p $LOG_DIR
                 cd $DAEMONDIR
-                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT > $LOG_DIR/mela-cost-eval.log -Dspring.profiles.active=$PROFILES 2>&1 &
+                daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT  -Dspring.profiles.active=$PROFILES  > $LOG_DIR/mela-cost-eval.log 2>&1 &
 		RETVAL=$?
                 echo
 		[ $RETVAL = 0 ] && touch /var/lock/mela-cost-analysis-service-daemon
