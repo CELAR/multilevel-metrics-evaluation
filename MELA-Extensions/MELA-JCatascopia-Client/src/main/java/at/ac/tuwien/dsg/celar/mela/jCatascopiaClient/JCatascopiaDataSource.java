@@ -20,7 +20,7 @@
 package at.ac.tuwien.dsg.celar.mela.jCatascopiaClient;
 
 import at.ac.tuwien.dsg.mela.common.exceptions.DataAccessException;
-import at.ac.tuwien.dsg.mela.common.jaxbEntities.monitoringConcepts.MetricInfo;
+import at.ac.tuwien.dsg.mela.common.jaxbEntities.monitoringConcepts.CollectedMetricValue;
 import at.ac.tuwien.dsg.mela.common.jaxbEntities.monitoringConcepts.MonitoredElementData;
 import at.ac.tuwien.dsg.mela.common.jaxbEntities.monitoringConcepts.MonitoringData;
 import at.ac.tuwien.dsg.mela.common.monitoringConcepts.MonitoredElement;
@@ -68,7 +68,11 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
 
     public JCatascopiaDataSource() {
     }
-    
+
+    @Override
+    public Long getRateAtWhichDataShouldBeRead() {
+        return (long) getPollingIntervalMs();
+    }
 
     /**
      * Currently the implementation is stupid. It queries for JCatscopia to get
@@ -129,11 +133,17 @@ public class JCatascopiaDataSource extends AbstractPollingDataSource {
                 elementData.setMonitoredElement(monitoredElement);
 
                 for (JCatascopiaMetric metric : agent.getAgentMetrics()) {
-                    MetricInfo metricInfo = new MetricInfo();
+                    if (metric == null || metric.getValue() == null) {
+                        continue;
+                    }
+                    CollectedMetricValue metricInfo = new CollectedMetricValue();
                     metricInfo.setName(metric.getName());
+                    metricInfo.setMonitoredElementLevel(MonitoredElement.MonitoredElementLevel.VM.toString());
+                    metricInfo.setMonitoredElementID(agent.getIp());
                     metricInfo.setType(metric.getType());
                     metricInfo.setUnits(metric.getUnit());
                     metricInfo.setValue(metric.getValue());
+                    metricInfo.setTimeSinceCollection("0");
                     elementData.addMetric(metricInfo);
                 }
 

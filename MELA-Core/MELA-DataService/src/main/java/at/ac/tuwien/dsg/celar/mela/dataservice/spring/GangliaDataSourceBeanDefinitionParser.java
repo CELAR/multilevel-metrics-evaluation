@@ -10,8 +10,7 @@ import org.w3c.dom.Element;
  * Created by omoser on 1/17/14.
  */
 public class GangliaDataSourceBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
-
-    public Class getBeanClass(Element element) {
+  public Class getBeanClass(Element element) {
         return GangliaDataSource.class;
     }
 

@@ -45,7 +45,7 @@
     <!-- this configures a standalone HSQLDB server instance that is started during application startup -->
     <!--HyperSQL connector-->
     <beans profile="PORTABLE">
-        <bean id="database" class="at.ac.tuwien.dsg.mela.dataservice.spring.HsqlServerBean" lazy-init="false">
+        <bean id="database" class="at.ac.tuwien.dsg.celar.mela.dataservice.spring.HsqlServerBean" lazy-init="false">
             <property name="serverProperties">
                 <props>
                     <prop key="server.port">9001</prop>
