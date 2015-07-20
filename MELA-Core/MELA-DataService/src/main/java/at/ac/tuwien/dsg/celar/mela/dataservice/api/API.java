@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.ext.Provider;
-import at.ac.tuwien.dsg.mela.dataservice.api.ConfigurationService;
+import at.ac.tuwien.dsg.mela.dataservice.api.DataService;
 
 
 /**
@@ -34,6 +34,6 @@ import at.ac.tuwien.dsg.mela.dataservice.api.ConfigurationService;
 @Provider
 @Path("/")
 @Api(value = "/", description = "The Data service is the entry point for all monitoring concerns")
-public class API extends ConfigurationService{
+public class API extends DataService{
 
 }

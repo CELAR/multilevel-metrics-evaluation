@@ -19,11 +19,7 @@
     <!-- MELA properties -->
     <context:property-placeholder location="file:./config/mela-data-service.properties"/>
 
-    <import resource="file:./config/dataSources.xml" />
-    
-    <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    
-    
+   
     <!--     JMS stuff 
     -->    
     <bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -35,8 +31,14 @@
             <amq:transportConnector uri="tcp://localhost:9124"/>
         </amq:transportConnectors>
     </amq:broker>
+    
+    <!--Metric validators-->
+    <bean id="defaultMetricsValidationTest"  class="at.ac.tuwien.dsg.mela.dataservice.validation.impl.DefaultMetricValidationTest">
+    </bean>
 
-  
+    <import resource="file:./config/dataSources.xml" />
+    
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
 
     <!-- database related configuration -->
 
@@ -127,12 +129,16 @@
     </beans>
     
     <beans>
+        
+        <bean id="dataFreshnessAnalysisEngine" class="at.ac.tuwien.dsg.mela.dataservice.qualityanalysis.impl.DefaultFreshnessAnalysisEngine"/>
+       
+    
         <!-- Adds annotated spring beans -->
         <context:component-scan base-package="at.ac.tuwien.dsg"/>
      
         <jaxrs:server id="customerService" address="/">
             <jaxrs:serviceBeans>
-                <ref bean="configurationService"/>
+                <ref bean="dataService"/>
                 <bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
             </jaxrs:serviceBeans>
             <jaxrs:features>

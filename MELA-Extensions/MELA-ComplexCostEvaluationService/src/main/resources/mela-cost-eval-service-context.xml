@@ -16,6 +16,16 @@
     <context:component-scan base-package="at.ac.tuwien.dsg.mela"/>
     
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
+ 
+    
+    
+    <bean id="cloudFileDescriptionParser" class="at.ac.tuwien.dsg.quelle.cloudDescriptionParsers.impl.CloudFileDescriptionParser">
+    </bean> 
+    
+      
+    <bean id="dataAccess" class="at.ac.tuwien.dsg.quelle.extensions.neo4jPersistenceAdapter.DataAccess">
+        <constructor-arg name="databaseLocation" value="/tmp/cloud-providers-pricing-scheme"/>
+    </bean>
 
     <jaxrs:server id="customerService" address="/">
         <jaxrs:serviceBeans>
@@ -44,33 +54,20 @@
         <property name="scan" value="true"/>
     </bean>
 
-    <!--    <bean class="at.ac.tuwien.dsg.mela.common.persistence.PersistenceSQLAccess"/>-->
-
- 
-    <!-- JMS stuff -->
-    <bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://${dataservice.ip}:9124"/>
-    </bean>
-
-    <amq:queue id="destination" physicalName="MELADataService.Config"/>
-
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="jmsFactory"/>
-        <property name="defaultDestination" ref="destination"/>
-    </bean>
-    
-    
     <beans profile="PORTABLE">
          
     
         <!--HyperSQL connector-->
         <bean id="melaDBConnector" class="org.springframework.jdbc.datasource.DriverManagerDataSource"  >
             <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-            <property name="url" value="jdbc:hsqldb:hsql://localhost:9001/mela;hsqldb.cache_rows=100;hsqldb.log_data=false"/>
+            <property name="url" value="jdbc:hsqldb:hsql://${dataservice.ip}:9001/mela;hsqldb.cache_rows=100;hsqldb.log_data=false"/>
             <property name="username" value="SA"/>
             <property name="password" value=""/>
         </bean>
-       
+     
+        <jdbc:initialize-database data-source="melaDBConnector">
+            <jdbc:script location="classpath*:sql/schema-continous.sql"/>
+        </jdbc:initialize-database>
     
     </beans>
     
@@ -80,11 +77,13 @@
         <!-- H2 connector-->
         <bean id="melaDBConnector" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"  >
             <property name="driverClassName" value="org.h2.Driver"/>
-            <property name="url" value="jdbc:h2:tcp://localhost:9001/${dataservice.configuration.databasePath};;DB_CLOSE_DELAY=-1"/>
+            <property name="url" value="jdbc:h2:tcp://${dataservice.ip}:9001/${dataservice.configuration.databasePath};;DB_CLOSE_DELAY=-1"/>
             <property name="username" value="SA"/>
             <property name="password" value=""/>
         </bean> 
-       
+        <jdbc:initialize-database data-source="melaDBConnector" >
+            <jdbc:script location="classpath*:sql/schema-continous.sql"/>
+        </jdbc:initialize-database>
 
     
     </beans>
@@ -94,11 +93,17 @@
       
         <bean id="melaDBConnector"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
             <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-            <property name="url" value="jdbc:mysql://localhost/mela"/>
+            <property name="url" value="jdbc:mysql://${dataservice.ip}/mela"/>
             <property name="username" value="mela"/>
             <property name="password" value="mela"/>
         </bean>
         
+          
+         
+        <jdbc:initialize-database data-source="melaDBConnector" >
+            <jdbc:script location="classpath*:sql/schema-continous-mysql.sql"/>
+        </jdbc:initialize-database>
+
     
     </beans>
      

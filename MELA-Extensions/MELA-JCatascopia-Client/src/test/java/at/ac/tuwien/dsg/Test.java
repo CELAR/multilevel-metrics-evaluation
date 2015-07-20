@@ -35,7 +35,7 @@ public class Test {
 
 
         JCatascopiaDataSource catascopiaDataSource = new JCatascopiaDataSource();
-        catascopiaDataSource.setUrl("http://109.231.122.22:8080/JCatascopia-Web/restAPI");
+        catascopiaDataSource.setUrl("http://109.231.122.87:8080/JCatascopia-Web/restAPI");
         MonitoringData data = catascopiaDataSource.getMonitoringData();
         for (MonitoredElementData me : data.getMonitoredElementDatas()) {
             System.out.println(me.toString());

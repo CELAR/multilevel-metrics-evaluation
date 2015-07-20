@@ -19,7 +19,7 @@
  */
 package at.ac.tuwien.dsg.celar.mela.dataservice.spring;
 
-import at.ac.tuwien.dsg.mela.dataservice.dataSource.impl.GangliaDataSource;
+import at.ac.tuwien.dsg.mela.dataservice.dataSource.impl.queuebased.QueueBasedDataSource;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.util.StringUtils;
@@ -28,22 +28,28 @@ import org.w3c.dom.Element;
 /**
  * Author: Daniel Moldovan E-Mail: d.moldovan@dsg.tuwien.ac.at
  */
-public class GangliaDataSourceBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class PushDataSourceBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     public Class getBeanClass(Element element) {
-        return GangliaDataSource.class;
+        return QueueBasedDataSource.class;
     }
 
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder builder) {
-        String host = element.getAttribute("host");
-        String port = element.getAttribute("port");
         String pollingIntervalMs = element.getAttribute("polling-interval-ms");
+        String brokerURL = element.getAttribute("brokerURL");
+        String queueName = element.getAttribute("queue_name");
 
-        builder.addPropertyValue("hostname", host);
-        builder.addPropertyValue("port", Integer.valueOf(port));
+        if (StringUtils.hasText(brokerURL)) {
+            builder.addPropertyValue("brokerURL", brokerURL);
+        }
+
         if (StringUtils.hasText(pollingIntervalMs)) {
-            builder.addPropertyValue("pollingIntervalMs", Integer.valueOf(pollingIntervalMs));
+            builder.addPropertyValue("rateAtWhichDataShouldBeRead", Long.parseLong(pollingIntervalMs));
+        }
+
+        if (StringUtils.hasText(queueName)) {
+            builder.addPropertyValue("QUEUE_NAME", queueName);
         }
 
     }
