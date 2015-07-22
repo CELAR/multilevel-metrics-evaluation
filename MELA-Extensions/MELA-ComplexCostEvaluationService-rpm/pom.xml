@@ -114,9 +114,9 @@
 
                     </mappings>
 
-                    <preinstallScriptlet>
-                        <script>
-                            <!-- install debian init script: start-stop-deamon -->
+                    <!--                      <preinstallScriptlet>
+                     <script>
+                             install debian init script: start-stop-deamon 
                             yum -y install gcc
                             cd /usr/local/src/
                             wget -N http://za.archive.ubuntu.com/ubuntu/pool/main/d/dpkg/dpkg_1.15.5.6ubuntu4.tar.bz2
@@ -126,7 +126,7 @@
                             make
                             make install
                         </script>
-                    </preinstallScriptlet>
+                    </preinstallScriptlet>-->
 
                     <postinstallScriptlet>
                         <script>

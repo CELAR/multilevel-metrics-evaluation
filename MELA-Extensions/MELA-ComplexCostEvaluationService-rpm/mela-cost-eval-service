@@ -5,7 +5,7 @@
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start MELA ComplexCostEvaluationService daemon
-# Description:       To start-stop MELA-DS
+# Description:       To start-stop MELA-CES
 ### END INIT INFO
 
 RUN_MODE="daemons"
@@ -15,12 +15,15 @@ NAME=mela-cost-analysis-service
 DAEMONDIR=/opt/mela-cost-analysis-service
 DAEMON=MELA-ComplexCostEvaluationService-1.0-SNAPSHOT-war-exec.jar
 PIDDIR=/tmp/
+LOG_DIR=/tmp/mela
 PIDFILE=$PIDDIR/mela-cost-analysis-service.pid
 MELA_HTTP_PORT=8182
 PROFILES=MYSQL
 #PROFILES=H2
 #PROFILES=PORTABLE
-test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test $DAEMONDIR/$DAEMON dod not succed" 
+
+
+test -x $JAVA -a -f $DAEMONDIR/$DAEMON || echo "test -x $JAVA -a -f $DAEMONDIR/$DAEMON failed"  
 test -x $JAVA -a -f $DAEMONDIR/$DAEMON || exit 0
  
 . /etc/init.d/functions
