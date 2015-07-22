@@ -1,5 +1,5 @@
 ### BEGIN INIT INFO
-# Provides:          mela-cost-analysis-service
+# Provides:          mela-cost-eval-service
 # Required-Start: mysqld
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -11,12 +11,12 @@
 RUN_MODE="daemons"
 . /etc/profile
 JAVA=$(which java)
-NAME=mela-cost-analysis-service
-DAEMONDIR=/opt/mela-cost-analysis-service
-DAEMON=MELA-ComplexCostEvaluationService-1.0-SNAPSHOT-war-exec.jar
+NAME=mela-cost-eval-service
+DAEMONDIR=/opt/mela-cost-eval-service
+DAEMON=MELA-ComplexCostEvaluationService-1.0-SNAPSHOT-exec-war.jar
 PIDDIR=/tmp/
 LOG_DIR=/tmp/mela
-PIDFILE=$PIDDIR/mela-cost-analysis-service.pid
+PIDFILE=$PIDDIR/mela-cost-eval-service.pid
 MELA_HTTP_PORT=8182
 PROFILES=MYSQL
 #PROFILES=H2
@@ -36,7 +36,7 @@ case "$1" in
                 daemon --pidfile=$PIDFILE $JAVA -DLOG_DIR=$LOG_DIR -jar $DAEMON -httpPort $MELA_HTTP_PORT  -Dspring.profiles.active=$PROFILES  > $LOG_DIR/mela-cost-eval.log 2>&1 &
 		RETVAL=$?
                 echo
-		[ $RETVAL = 0 ] && touch /var/lock/mela-cost-analysis-service-daemon
+		[ $RETVAL = 0 ] && touch /var/lock/mela-cost-eval-service-daemon
 		;;
 	stop)
 		echo "Stopping Mela-CostEvaluationService  daemon"
@@ -46,7 +46,7 @@ case "$1" in
                 sudo kill -9 $pid
 		RETVAL=$?
    		echo
-                [ $RETVAL = 0 ] && rm -f /var/lock/mela-cost-analysis-service-daemon
+                [ $RETVAL = 0 ] && rm -f /var/lock/mela-cost-eval-service-daemon
  		;;
 	restart)
 		$0 stop
