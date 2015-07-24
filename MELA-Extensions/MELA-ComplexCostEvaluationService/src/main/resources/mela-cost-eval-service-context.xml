@@ -14,8 +14,9 @@
     
     <context:property-placeholder location="file:./config/mela-cost-eval-service.properties"/>
 
-     <context:component-scan base-package="at.ac.tuwien.dsg.mela.common"/>
+    <context:component-scan base-package="at.ac.tuwien.dsg.mela.common"/>
     <context:component-scan base-package="at.ac.tuwien.dsg.mela.costeval"/>
+    <context:component-scan base-package="at.ac.tuwien.dsg.celar.mela.costeval"/>
     
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     
@@ -45,7 +46,8 @@
 
     <jaxrs:server id="customerService" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="costEvalService"/>
+            <ref bean="costEvalAPI"/>
+            <ref bean="cloudDescriptionManagementAPI"/>
             <bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
         </jaxrs:serviceBeans>
         <jaxrs:features>

@@ -19,9 +19,10 @@
  */
 package at.ac.tuwien.dsg.celar.mela.costeval.api;
 
-import at.ac.tuwien.dsg.mela.costeval.api.CostEvalService;
+import at.ac.tuwien.dsg.mela.costeval.api.CloudProvidersManagementService;
 import com.wordnik.swagger.annotations.Api;
 import org.springframework.stereotype.Service;
+
 
 import javax.ws.rs.*;
 import javax.ws.rs.ext.Provider;
@@ -32,8 +33,8 @@ import javax.ws.rs.ext.Provider;
 @Service
 @Provider
 @Path("/")
-@Api(value = "/", description = "The ElasticityAnalysisService is the entry point for all elasticity related monitoring data")
-public class API extends CostEvalService{
+//@Api(value = "/", description = "The CloudProvidersManagementService is the entry point for all elasticity related monitoring data")
+public class CloudDescriptionManagementAPI extends CloudProvidersManagementService{
 
 
 }
