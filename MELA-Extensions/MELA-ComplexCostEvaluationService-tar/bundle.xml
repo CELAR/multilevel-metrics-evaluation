@@ -17,7 +17,7 @@
                         <directory>${project.basedir}/scripts</directory>
                         <outputDirectory>/</outputDirectory>
                         <includes>
-                                <include>mela-analysis-service</include>
+                                <include>mela-cost-eval-service</include>
                                 <include>installer.sh</include>
                         </includes>
                         <fileMode>0755</fileMode>
@@ -36,7 +36,7 @@
                         <directory>${project.build.directory}</directory>
                         <outputDirectory>/</outputDirectory>
                         <includes>
-                                <include>MELA-SpaceAndPathwayAnalysisService-*.jar</include>
+                                <include>MELA-ComplexCostEvaluationService-*.jar</include>
                         </includes>
                 </fileSet>
 
